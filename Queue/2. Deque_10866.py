@@ -1,22 +1,34 @@
 from collections import deque
 import sys
 input = sys.stdin.readline
-queue = deque([])
+
+a = deque([])
 
 order_number = int(input().strip())
 count = 0
 
 for i in range(order_number):
     order = input().strip().split()
-    if order[0] == "push":
-        queue.append(int(order[1]))
+    if order[0] == "push_front":
+        a.appendleft(int(order[1]))
         count += 1
 
-    elif order[0] == "pop":
+    elif order[0] == "push_back":
+        a.append(int(order[1]))
+        count += 1
+
+    elif order[0] == "pop_front":
         if count == 0:
             print("-1")
         else:
-            print(queue.popleft())
+            print(a.popleft())
+            count -= 1
+
+    elif order[0] == "pop_back":
+        if count == 0:
+            print("-1")
+        else:
+            print(a.pop())
             count -= 1
 
     elif order[0] == "size":
@@ -32,10 +44,10 @@ for i in range(order_number):
         if count == 0:
             print("-1")
         else:
-            print(queue[0])
+            print(a[0])
     
     elif order[0] == "back":
         if count == 0:
             print("-1")
         else:
-            print(queue[-1])
+            print(a[-1])
